@@ -27,7 +27,6 @@ variable "subnet_name" {
   
 }
 
-
 variable "my_ip" {
   type = string
 }
