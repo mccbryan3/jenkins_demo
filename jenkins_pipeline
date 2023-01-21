@@ -17,21 +17,25 @@ pipeline {
                 sh './wizcli auth --id $ID --secret $SECRET'}
             }
         }
+        stage('Create-Dockerfile') {
+            steps {
+                // Build an file for scanning
+                sh 'echo "FROM ubuntu:latest" > Dockerfile'
+                sh 'echo "RUN mkdir -p /home/se/.aws/" >> Dockerfile'
+                sh 'echo "ENV AWS_KEY_ID=AKIAJSIE37KKMHXI3BJQ" >> Dockerfile'
+                sh 'echo "ENV AWS_ACCESS_KEY=abC2D0EFGh12IjkLMN3/opQ+Stuv3123u56wxyz7" >> Dockerfile'
+            }
+        }
         stage('Scan-IaC') {
             steps {
                 // Scanning the image
                 sh 'echo "Scanning the image using wizcli..."'
-                sh './wizcli iac scan --name "demo-jenkins$BUILD_NUMBER" --path . --secrets -p iac-fail-medium -t "build_env=jenkins"'
+                sh './wizcli iac scan --name "demo-jenkins$BUILD_NUMBER" --path Dockerfile --secrets -t "build_env=jenkins"'
             }
         }
         stage('Build-Image') {
             steps {
                 // Build an image for scanning
-                sh 'echo "FROM ubuntu:latest" > Dockerfile'
-                sh 'echo "RUN mkdir -p /home/se/.aws/" >> Dockerfile'
-                sh 'echo "ENV AWS_KEY_ID=AKIAJSIE37KKMHXI3BJQ" >> Dockerfile'
-                sh 'echo "ENV AWS_ACCESS_KEY=abC2D0EFGh12IjkLMN3/opQ+Stuv3123u56wxyz7" >> Dockerfile'
-                sh 'cat Dockerfile'
                 sh 'sudo docker build --no-cache -t ubuntu-image:0.$BUILD_NUMBER .'
             }
         }
@@ -39,7 +43,7 @@ pipeline {
             steps {
                 // Scanning the image
                 sh 'echo "Scanning the image using wizcli..."'
-                sh './wizcli docker scan --image "ubuntu-image:0.$BUILD_NUMBER" -p vuln-one-medium -p secrets -t "build_env=jenkins"'
+                sh './wizcli docker scan --image "ubuntu-image:0.$BUILD_NUMBER" -t "build_env=jenkins"'
             }
         }
     }
