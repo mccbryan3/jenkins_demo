@@ -30,19 +30,19 @@
     a. Manage Jenkins<br>
     ![](./images/manage_jenkins.png)<br>
     b. Manage Credentials<br>
-    ![](./images/manage_creds.png)
-    c. System
-    ![](./images/system_credentials.png)
-    d. Global Credentials
-    ![](./images/global_creds.png)
-    e. Add Credentials
+    ![](./images/manage_creds.png)<br>
+    c. System<br>
+    ![](./images/system_credentials.png)<br>
+    d. Global Credentials<br>
+    ![](./images/global_creds.png)<br>
+    e. Add Credentials<br>
     ![](./images/add_creds.png)
-21. Go back to the Jenkins Dashboard
-22. New Item
-![](./images/new_item.png)
-23. Add pipeline project with name `wiz-demo-pipeline`
-![](./images/pipeline_project.png)
-24. Add the pipeline file data ![`jenkins_pipeline`](./jenkins_pipeline) to the pipeline steps
-25. Run the pipeline
-26. Review output
-27. Add Wiz CICD Policies to the pipeline scans to make the pipeline fail for vulns.. then iac
+21. Go back to the Jenkins Dashboard<br>
+22. New Item<br>
+![](./images/new_item.png)<br>
+23. Add pipeline project with name `wiz-demo-pipeline`<br>
+![](./images/pipeline_project.png)<br>
+24. Add the pipeline file data ![`jenkins_pipeline`](./jenkins_pipeline) to the pipeline steps<br>
+25. Run the pipeline<br>
+26. Review output<br>
+27. Add Wiz CICD Policies to the pipeline scans to make the pipeline fail for vulns.. then iac<br>
