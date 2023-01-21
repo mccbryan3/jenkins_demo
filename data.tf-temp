@@ -1,0 +1,14 @@
+data "azurerm_resource_group" "demoresources" {
+  name = var.resource_group_name
+}
+
+data "azurerm_virtual_network" "demoresources" {
+  name = var.vnet_name
+  resource_group_name = var.resource_group_name
+}
+
+data "azurerm_subnet" "demoresources" {
+  name = var.subnet_name
+  resource_group_name = data.azurerm_resource_group.demoresources.name
+  virtual_network_name = data.azurerm_virtual_network.demoresources.name
+}
