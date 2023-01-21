@@ -36,3 +36,6 @@
 22. New Item
 23. Add pipeline project with name `wiz-demo-pipeline` 
 24. Add the pipeline file data `jenkins_pipeline` to the pipeline steps
+25. Run the pipeline
+26. Review output
+27. Add policies to the pipeline scans to make the pipeline fail for vulns.. then iac
