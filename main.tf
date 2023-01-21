@@ -25,18 +25,25 @@ resource "azurerm_network_security_group" "main" {
   location            = azurerm_resource_group.jenkins_demo.location
   resource_group_name = azurerm_resource_group.jenkins_demo.name
 
-  security_rule {
-    name                       = "SSH"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-  security_rule {
+  tags = var.tags
+}
+
+resource "azurerm_network_security_rule" "jenkins_demo_ssh" {
+  name                       = "SSH"
+  priority                   = 1001
+  direction                  = "Inbound"
+  access                     = "Allow"
+  protocol                   = "Tcp"
+  source_port_range          = "*"
+  destination_port_range     = "22"
+  source_address_prefix      = var.my_ip
+  destination_address_prefix = "*"
+  resource_group_name = azurerm_resource_group.jenkins_demo.name
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
+
+resource "azurerm_network_security_rule" "jenkins_demo_web" {
     name                       = "AllowInbound8080"
     priority                   = 1002
     direction                  = "Inbound"
@@ -44,10 +51,10 @@ resource "azurerm_network_security_group" "main" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "8080"
-    source_address_prefix      = "*"
+    source_address_prefix      = var.my_ip
     destination_address_prefix = "*"
-  }
-  tags = var.tags
+    resource_group_name = azurerm_resource_group.jenkins_demo.name
+    network_security_group_name = azurerm_network_security_group.main.name
 }
 
 resource "azurerm_network_interface" "main" {
@@ -82,6 +89,8 @@ resource "azurerm_virtual_machine" "main" {
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
 
+  
+
   storage_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
@@ -104,15 +113,16 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   os_profile_linux_config {
-    disable_password_authentication = false
-    # ssh_keys {
-    #   key_data = file("~/.ssh/id_rsa.pub")
-    #   path     = "/home/${var.admin_user}/.ssh/authorized_keys"
-    # }
+    disable_password_authentication = true
+    ssh_keys {
+      key_data = file("~/.ssh/id_rsa.pub")
+      path     = "/home/${var.admin_user}/.ssh/authorized_keys"
+    }
   }
 
   tags = var.tags
 }
+
 
 # Data template Bash bootstrapping file
 data "template_file" "linux-vm-cloud-init" {
