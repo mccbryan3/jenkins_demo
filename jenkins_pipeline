@@ -21,7 +21,7 @@ pipeline {
             steps {
                 // Scanning the image
                 sh 'echo "Scanning the image using wizcli..."'
-                sh './wizcli iac scan --name "bm-jenkins$BUILD_NUMBER" --path . --secrets -p iac-fail-medium -t "build_env=jenkins"'
+                sh './wizcli iac scan --name "demo-jenkins$BUILD_NUMBER" --path . --secrets -p iac-fail-medium -t "build_env=jenkins"'
             }
         }
         stage('Build-Image') {
