@@ -31,3 +31,8 @@
     b. Manage Credentials
     c. System
     d. Global Credentials
+    e. Add Credentials
+21. Go back to the Jenkins Dashboard
+22. New Item
+23. Add pipeline project with name `wiz-demo-pipeline` 
+24. Add the pipeline file data `jenkins_pipeline` to the pipeline steps
