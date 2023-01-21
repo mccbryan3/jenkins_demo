@@ -12,7 +12,7 @@
 7. Log into the instance wit `ssh azureuser@<public_ip_address_here>`<br>
 8. run `sudo tail -f /var/log/cloud-init-output.log`<br>
 9. Stretch<br>
-10. Once the log finishes grab the GUID for the Jenkins admin initial password<br>
+10. Once the log finishes record the GUID for the Jenkins admin initial password<br>
 ![](./images/cloud_init_complete.png)<br>
 11. Go to `http://<public_ip_address_here>:8080`<br>
 12. Unlock Jenkins with GUID<br>
@@ -24,5 +24,10 @@
 16. Select `Not now` for instance configuration<br>
 17. Start using Jenkins<br>
 ![](./images/start_using_jenkins.png)<br>
-18. Restart jenkins from the instance `sudo systemctl restart jenkins`
-18. Run through the docs to configure the jenkins integration for wiz-cli<br>
+18. Restart jenkins from the instance `sudo systemctl restart jenkins`<br>
+19. Log back into Jenkins with admin and the initial password
+20. Add the credentials to Jenkins<br>
+    a. Manage Jenkins
+    b. Manage Credentials
+    c. System
+    d. Global Credentials
