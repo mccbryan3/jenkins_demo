@@ -8,6 +8,7 @@
 5. Run `terraform apply -var-file ./demo.tfvars --auto-approve`<br>
 6. Record the public ip frm the output<br>
     * If there is no output then run `terraform apply -var-file ./demo.tfvars --auto-approve`<br>
+    NOTE: THIS SEEMS TO BE REQUIRED CURRENTLY<br>
 7. Log into the instance wit `ssh azureuser@<public_ip_address_here>`<br>
 8. run `sudo tail -f /var/log/cloud-init-output.log`<br>
 9. Stretch<br>
@@ -23,4 +24,5 @@
 16. Select `Not now` for instance configuration<br>
 17. Start using Jenkins<br>
 ![](./images/start_using_jenkins.png)<br>
+18. Restart jenkins from the instance `sudo systemctl restart jenkins`
 18. Run through the docs to configure the jenkins integration for wiz-cli<br>
