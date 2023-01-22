@@ -12,13 +12,14 @@
 1. Check that you have an ssh public key `cat ~/.ssh/id_rsa.pub`<br>
     * If there is no file then run `ssh-keygen` to generate one<br>
 2. (optional) Run `curl ifconfig.me` and record your ip<br>
-3. (optional) Overwrite the `may_ip` variable in `demo.tfvars`<br>
+3. (optional) Overwrite the `my_ip` variable in `demo.tfvars`<br>
 4. Run `terraform init`<br>
 5. Run `terraform apply -var-file ./demo.tfvars --auto-approve`<br>
 6. Record the public ip frm the output<br>
     * If there is no output then run `terraform apply -var-file ./demo.tfvars --auto-approve`<br>
     NOTE: THIS SEEMS TO BE REQUIRED CURRENTLY<br>
-7. Log into the instance wit `ssh azureuser@<public_ip_address_here>`<br>
+7. Log into the instance with `ssh azureuser@<public_ip_address_here>`<br>
+    * NOTE: If you recieve access denied.. Go get coffee and try again :-)
 8. run `sudo tail -f /var/log/cloud-init-output.log`<br>
 9. Stretch<br>
 10. Once the log finishes record the GUID for the Jenkins admin initial password<br>
@@ -45,7 +46,9 @@
     d. Global Credentials<br>
     ![](./images/global_creds.png)<br>
     e. Add Credentials<br>
-    ![](./images/add_creds.png)
+    ![](./images/add_creds.png)<br>
+    f. Add `username and password` credentials as shown below.
+        * NOTE: Be sure to give them the id of `wiz-cli`
 21. Go back to the Jenkins Dashboard<br>
 22. New Item<br>
 ![](./images/new_item.png)<br>
@@ -53,5 +56,6 @@
 ![](./images/pipeline_project.png)<br>
 24. Add the pipeline file data [jenkins_pipeline](./jenkins_pipeline) to the pipeline steps<br>
 25. Run the pipeline<br>
+    * If you recieve `Got permission denied while trying to connect to the Docker daemon socket` restart jenkins as shown above
 26. Review output<br>
 27. Add Wiz CICD Policies to the pipeline scans to make the pipeline fail for vulns.. then iac<br>
