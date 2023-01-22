@@ -2,7 +2,7 @@
 
 ## Pre-requisities:
 
-1. Installed ![azcli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+1. Installed [azcli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 2. Authenticated azcli
 3. Set the subscription to the targeted subscription for deployment with azcli
     * `az account set --subscription <mysubscription>`
@@ -51,7 +51,7 @@
 ![](./images/new_item.png)<br>
 23. Add pipeline project with name `wiz-demo-pipeline`<br>
 ![](./images/pipeline_project.png)<br>
-24. Add the pipeline file data ![jenkins_pipeline](./jenkins_pipeline) to the pipeline steps<br>
+24. Add the pipeline file data [jenkins_pipeline](./jenkins_pipeline) to the pipeline steps<br>
 25. Run the pipeline<br>
 26. Review output<br>
 27. Add Wiz CICD Policies to the pipeline scans to make the pipeline fail for vulns.. then iac<br>
